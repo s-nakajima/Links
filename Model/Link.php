@@ -1,21 +1,23 @@
 <?php
 /**
- * LinklistPartSetting Model
+ * Link Model
  *
- * @property LinklistBlock $LinklistBlock
- * @property Part $Part
+ * @property Block $Block
+ * @property Category $Category
  *
-* @author   Jun Nishikawa <topaz2@m0n0m0n0.com>
-* @link     http://www.netcommons.org NetCommons Project
-* @license  http://www.netcommons.org/license.txt NetCommons License
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('LinkListsAppModel', 'LinkLists.Model');
+App::uses('LinksAppModel', 'Links.Model');
 
 /**
- * Summary for LinklistPartSetting Model
+ * Link Model
  */
-class LinklistPartSetting extends LinkListsAppModel {
+class Link extends LinksAppModel {
 
 /**
  * Use database config
@@ -30,7 +32,7 @@ class LinklistPartSetting extends LinkListsAppModel {
  * @var array
  */
 	public $validate = array(
-		'linklist_block_id' => array(
+		'block_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -40,7 +42,17 @@ class LinklistPartSetting extends LinkListsAppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'part_id' => array(
+		'key' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'status' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -50,39 +62,9 @@ class LinklistPartSetting extends LinkListsAppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'readable_content' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'editable_content' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'creatable_content' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'publishable_content' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+		'click_count' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -100,16 +82,16 @@ class LinklistPartSetting extends LinkListsAppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'LinklistBlock' => array(
-			'className' => 'LinklistBlock',
-			'foreignKey' => 'linklist_block_id',
+		'Block' => array(
+			'className' => 'Block',
+			'foreignKey' => 'block_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Part' => array(
-			'className' => 'Part',
-			'foreignKey' => 'part_id',
+		'Category' => array(
+			'className' => 'Category',
+			'foreignKey' => 'category_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
